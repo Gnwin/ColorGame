@@ -19,7 +19,7 @@ header > p {
     margin: 10px auto;
 }
 
-.color {
+.asked-color {
     font-size: 2em;
 }
 
@@ -48,7 +48,7 @@ nav li:hover {
     color:white;
 }
 
-.msg {
+.status {
     font-size: 20px;
 }
 
@@ -59,7 +59,7 @@ nav li:hover {
     padding-top: 20px;
 }
 
-.square {
+.color-square {
     background-color: blue;
     width: 30%;
     padding-top: 30%;

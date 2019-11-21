@@ -7,39 +7,36 @@ let colors = [
     "rgb(55, 102, 200)"
 ]
 
-let colorsDiv = document.querySelectorAll(".square");
-let pickedColor = colors[4];
-let colorDisplay = document.querySelector(".color");
-let headerBackground = document.querySelector("header")
-let message = document.querySelector(".msg");
+let colorSquares = document.querySelectorAll(".color-square");
+let askedColor = document.querySelector(".asked-color");
+let headerBackground = document.querySelector("header");
+let gameStatus = document.querySelector(".status");
+let pickedColor = colors[Math.floor(Math.random()*colors.length)];
+askedColor.innerHTML = pickedColor;
+gameStatus.innerHTML = "";
 
-colorDisplay.innerHTML =  pickedColor;
-
-for (i=0; i<=colorsDiv.length; i++){
-    colorsDiv[i].style.backgroundColor = colors[i];
-    colorsDiv[i].addEventListener("click", function() {
+for (let i = 0; i < colorSquares.length; i++){
+    colorSquares[i].style.backgroundColor = colors[i];
+    colorSquares[i].addEventListener("click", function() {
         let clickedColor = this.style.backgroundColor;
-        if (clickedColor === pickedColor) {
-            colorsDiv[i].style.backgroundColor = pickedColor;
-            headerBackground.style.backgroundcolor = pickedColor;
+        if (clickedColor !== pickedColor) {
+            gameStatus.innerHTML = "Try again!"
+            this.style.backgroundColor = "black";
         } else {
-            colorsDiv[i].style.backgroundColor = "black";
+            gameStatus.innerHTML = "Correct!";
+            rightColor(pickedColor);
+            headerBackground.style.backgroundColor = pickedColor;
         }      
     })
 }
 
+function rightColor(color) {
+    for (let i = 0; i < colors.length; i++) {
+        colorSquares[i].style.backgroundColor = color;
+    }
+}
 
-// let pickedColor = colors[Math.floor(Math.random()*(colors.length))];
+    
 
-
-// for (let i = 0; i < colors.length; i++) {
-//     colors[i].addEventListener("click", function() {
-//         if (pickedColor == colors[i]) {
-//             colorsDiv[i].style.backgroundColor = pickedColor;
-//         } else {
-//             colorsDiv[i].style.display = "none";
-//         }  
-//     })
-// }
 
 

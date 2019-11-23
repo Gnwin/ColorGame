@@ -73,5 +73,9 @@ nav li:hover {
     cursor: pointer;
 }
 
+.selected {
+    background-color: steelblue;
+    color: white;
+}
 
 

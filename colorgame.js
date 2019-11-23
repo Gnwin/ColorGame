@@ -1,19 +1,31 @@
-let colors = [
-    "rgb(255, 122, 100)",
-    "rgb(95, 100, 80)",
-    "rgb(30, 100, 100)",
-    "rgb(80, 255, 150)",
-    "rgb(155, 115, 50)",
-    "rgb(55, 102, 200)"
-]
-
+let colors = generateColors(6);
 let colorSquares = document.querySelectorAll(".color-square");
 let askedColor = document.querySelector(".asked-color");
 let headerBackground = document.querySelector("header");
 let gameStatus = document.querySelector(".status");
-let pickedColor = colors[Math.floor(Math.random()*colors.length)];
+let freshGameButton = document.querySelector(".freshgame");
+let pickedColor = pickColor();
 askedColor.innerHTML = pickedColor;
 gameStatus.innerHTML = "";
+
+function pickColor(){
+    let random = colors[Math.floor(Math.random()*colors.length)];
+    return random;
+}
+
+freshGameButton.addEventListener("click", function(){
+    //gemnerate random colors
+    colors = generateColors(6);
+    //pick one random colors
+    pickedColor = pickColor();
+    //reflect the pickedColor in the question area
+    askedColor.innerHTML = pickedColor;
+    //change color of squares
+    for (let i = 0; i < colorSquares.length; i++){
+        colorSquares[i].style.backgroundColor = colors[i];
+    }
+    headerBackground.style.backgroundColor = "steelblue"
+})
 
 for (let i = 0; i < colorSquares.length; i++){
     colorSquares[i].style.backgroundColor = colors[i];
@@ -36,7 +48,19 @@ function rightColor(color) {
     }
 }
 
-    
+function generateColors(num){
+    let arr = [];
+    for (i=0; i<num; i++){
+        arr.push(getRandomColors())
+    }
+    return arr;
+}
 
+function getRandomColors(){
+    let r = Math.floor(Math.random()*256);
+    let g = Math.floor(Math.random()*256);
+    let b = Math.floor(Math.random()*256);
+    return "rgb(" + r + ", " + g + ", " + b + ")";
+}
 
 

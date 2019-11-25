@@ -14,6 +14,7 @@ hardButton.classList.add("selected");
 
 
 easyButton.addEventListener("click", function(){
+    gameStatus.innerHTML = "";
     easyButton.classList.add("selected");
     hardButton.classList.remove("selected");
     containerDiv.innerHTML = "<div class='color-square'></div><div class='color-square'></div><div class='color-square'></div>";
@@ -28,6 +29,7 @@ easyButton.addEventListener("click", function(){
 })
 
 hardButton.addEventListener("click", function(){
+    gameStatus.innerHTML = "";
     easyButton.classList.remove("selected");
     hardButton.classList.add("selected");
     containerDiv.innerHTML = "<div class='color-square'></div><div class='color-square'></div><div class='color-square'></div><div class='color-square'></div><div class='color-square'></div><div class='color-square'></div>";
@@ -89,6 +91,7 @@ function pickColor(){
 
 function fresh(u) {
     freshGameButton.addEventListener("click", function(){
+        gameStatus.innerHTML = "";
         colors = generateColors(u);
         pickedColor = pickColor();
         askedColor.innerHTML = pickedColor;

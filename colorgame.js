@@ -13,65 +13,53 @@ gameStatus.innerHTML = "";
 hardButton.classList.add("selected");
 
 
-
-freshGameButton.addEventListener("click", function(){
-    colors = generateColors(6);
-    pickedColor = pickColor();
-    askedColor.innerHTML = pickedColor;
-    for (i = 0; i < colorSquares.length; i++){
-        colorSquares[i].style.backgroundColor = colors[i];
-    }
-    headerBackground.style.backgroundColor = "steelblue";
-    freshGameButton.innerHTML = "NEW GAME"; 
-})
-
 easyButton.addEventListener("click", function(){
     easyButton.classList.add("selected");
     hardButton.classList.remove("selected");
+    containerDiv.innerHTML = "<div class='color-square'></div><div class='color-square'></div><div class='color-square'></div>";
+    colorSquares = document.querySelectorAll(".color-square");
     colors = generateColors(3);
     pickedColor = pickColor();
+    iterables();
     askedColor.innerHTML = pickedColor;
     headerBackground.style.backgroundColor = "steelblue";
     freshGameButton.innerHTML = "NEW GAME";
-    for (i = 0; i < colorSquares.length; i++) {
-        if (colors[i]) {
-            colorSquares[i].style.backgroundColor = colors[i];
-        } else {
-            colorSquares[i].style.display = 'none';
-        }
-    }
+    fresh(3);
 })
 
 hardButton.addEventListener("click", function(){
     easyButton.classList.remove("selected");
     hardButton.classList.add("selected");
+    containerDiv.innerHTML = "<div class='color-square'></div><div class='color-square'></div><div class='color-square'></div><div class='color-square'></div><div class='color-square'></div><div class='color-square'></div>";
+    colorSquares = document.querySelectorAll(".color-square");
     colors = generateColors(6);
     pickedColor = pickColor();
+    iterables();
     askedColor.innerHTML = pickedColor;
     headerBackground.style.backgroundColor = "steelblue";
     freshGameButton.innerHTML = "NEW GAME";
-    for (i = 0; i < colorSquares.length; i++) {
-        colorSquares[i].style.display = 'block';
-        colorSquares[i].style.backgroundColor = colors[i];
-    }
+    fresh(6);
 })
 
-for (let i = 0; i < colorSquares.length; i++){
-    colorSquares[i].style.backgroundColor = colors[i];
-    colorSquares[i].addEventListener("click", function() {
-        let clickedColor = this.style.backgroundColor;
-        if (clickedColor !== pickedColor) {
-            gameStatus.innerHTML = "Try again!"
-            this.style.backgroundColor = "black";
-        } else {
-            gameStatus.innerHTML = "Correct!";
-            rightColor(pickedColor);
-            headerBackground.style.backgroundColor = pickedColor;
-            freshGameButton.innerHTML = "PLAY AGAIN!";
-        }
-    })
+function iterables() {
+    for (let i = 0; i < colorSquares.length; i++){
+        colorSquares[i].style.backgroundColor = colors[i];
+        colorSquares[i].addEventListener("click", function() {
+            let clickedColor = this.style.backgroundColor;
+            if (clickedColor !== pickedColor) {
+                gameStatus.innerHTML = "Try again!"
+                this.style.backgroundColor = "black";
+            } else {
+                gameStatus.innerHTML = "Correct!";
+                rightColor(pickedColor);
+                headerBackground.style.backgroundColor = pickedColor;
+                freshGameButton.innerHTML = "PLAY AGAIN!"
+            }      
+        })
+    } 
 }
 
+iterables();
 
 function rightColor(color) {
     for (let i = 0; i < colors.length; i++) {
@@ -82,7 +70,7 @@ function rightColor(color) {
 function generateColors(num){
     let arr = [];
     for (i=0; i<num; i++){
-        arr.push(getRandomColors())
+        arr.push(getRandomColors());
     }
     return arr;
 }
@@ -99,4 +87,16 @@ function pickColor(){
     return random;
 }
 
-
+function fresh(u) {
+    freshGameButton.addEventListener("click", function(){
+        colors = generateColors(u);
+        pickedColor = pickColor();
+        askedColor.innerHTML = pickedColor;
+        for (let i = 0; i < colorSquares.length; i++){
+            colorSquares[i].style.backgroundColor = colors[i];
+        }
+        headerBackground.style.backgroundColor = "steelblue";
+        freshGameButton.innerHTML = "NEW GAME";
+    })  
+}
+fresh(6);

@@ -11,37 +11,64 @@ let containerDiv = document.querySelector(".container");
 askedColor.innerHTML = pickedColor;
 gameStatus.innerHTML = "";
 hardButton.classList.add("selected");
+let gameModes = document.querySelectorAll("#mode");
 
 
-easyButton.addEventListener("click", function(){
+for (let i = 0; i<gameModes.length; i++) {
+  gameModes[i].addEventListener("click", function() {
     gameStatus.innerHTML = "";
-    easyButton.classList.add("selected");
-    hardButton.classList.remove("selected");
-    containerDiv.innerHTML = "<div class='color-square'></div><div class='color-square'></div><div class='color-square'></div>";
-    colorSquares = document.querySelectorAll(".color-square");
-    colors = generateColors(3);
+    gameModes[0].classList.remove("selected");
+    gameModes[1].classList.remove("selected");
+    this.classList.add("selected");
+    if (this.innerHTML === "EASY") {
+        containerDiv.innerHTML = "<div class='color-square'></div><div class='color-square'></div><div class='color-square'></div>";
+        colorSquares = document.querySelectorAll(".color-square");
+        colors = generateColors(3);
+        fresh(3);
+    } else {
+        containerDiv.innerHTML = "<div class='color-square'></div><div class='color-square'></div><div class='color-square'></div><div class='color-square'></div><div class='color-square'></div><div class='color-square'></div>";
+        colorSquares = document.querySelectorAll(".color-square");
+        colors = generateColors(6);
+        fresh(6);
+    }
     pickedColor = pickColor();
     iterables();
     askedColor.innerHTML = pickedColor;
     headerBackground.style.backgroundColor = "steelblue";
     freshGameButton.innerHTML = "NEW GAME";
-    fresh(3);
-})
+  });
+}
 
-hardButton.addEventListener("click", function(){
-    gameStatus.innerHTML = "";
-    easyButton.classList.remove("selected");
-    hardButton.classList.add("selected");
-    containerDiv.innerHTML = "<div class='color-square'></div><div class='color-square'></div><div class='color-square'></div><div class='color-square'></div><div class='color-square'></div><div class='color-square'></div>";
-    colorSquares = document.querySelectorAll(".color-square");
-    colors = generateColors(6);
-    pickedColor = pickColor();
-    iterables();
-    askedColor.innerHTML = pickedColor;
-    headerBackground.style.backgroundColor = "steelblue";
-    freshGameButton.innerHTML = "NEW GAME";
-    fresh(6);
-})
+
+// easyButton.addEventListener("click", function(){
+//     gameStatus.innerHTML = "";
+//     easyButton.classList.add("selected");
+//     hardButton.classList.remove("selected");
+//     containerDiv.innerHTML = "<div class='color-square'></div><div class='color-square'></div><div class='color-square'></div>";
+//     colorSquares = document.querySelectorAll(".color-square");
+//     colors = generateColors(3);
+//     pickedColor = pickColor();
+//     iterables();
+//     askedColor.innerHTML = pickedColor;
+//     headerBackground.style.backgroundColor = "steelblue";
+//     freshGameButton.innerHTML = "NEW GAME";
+//     fresh(3);
+// })
+
+// hardButton.addEventListener("click", function(){
+//     gameStatus.innerHTML = "";
+//     easyButton.classList.remove("selected");
+//     hardButton.classList.add("selected");
+//     containerDiv.innerHTML = "<div class='color-square'></div><div class='color-square'></div><div class='color-square'></div><div class='color-square'></div><div class='color-square'><div><div class='color-square'></div>";
+//     colorSquares = document.querySelectorAll(".color-square");
+//     colors = generateColors(6);
+//     pickedColor = pickColor();
+//     iterables();
+//     askedColor.innerHTML = pickedColor;
+//     headerBackground.style.backgroundColor = "steelblue";
+//     freshGameButton.innerHTML = "NEW GAME";
+//     fresh(6);
+// })
 
 function iterables() {
     for (let i = 0; i < colorSquares.length; i++){
@@ -103,3 +130,4 @@ function fresh(u) {
     })  
 }
 fresh(6);
+
